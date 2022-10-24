@@ -41,7 +41,6 @@ public class ThreeMatrixMultiplication {
         int result2 = numOfMultiplications(A, E) + numOfMultiplications(B, C);
         System.out.println( " Number of multiplication from A(BC):" + result2);
 
-
         return Math.min(result1, result2);
     }
 
