@@ -2,12 +2,16 @@ package MatrixMultiplication;
 
 public class ThreeMatrixMultiplication {
     public static void main(String[] args) {
-        int A_row=10; int A_col=30;
-        int B_row=30; int B_col=5;
-        int C_row=5; int C_col=60;
+        int A_row=5; int A_col=30;
+        int B_row=30; int B_col=10;
+        int C_row=10; int C_col=60;
         int[] A = {A_row, A_col};
         int[] B = {B_row, B_col};
         int[] C = {C_row, C_col};
+
+        // (ABC)==> (A[0], B[0], C[0], C[1])=(10, 30, 5, 60)==>(AB)C=(10, 30, 5)+(10, 5, 60): min num=5 showed up twice
+        // (ABC)==> (A[0], B[0], C[0], C[1])=(10, 30, 5, 60)==>A(BC)=(30, 5, 60)+(10, 30, 60): max num=60 showed up twice
+        // check (10, 5, 30, 60); (10, 30, 5, 60); (30, 5, 10, 60); (30, 10, 5, 60); (5, 10, 30, 60); (5, 30, 10, 60)
 
         System.out.println("numOfMultiplications(A, B) = " + numOfMultiplications(A, B));
 
