@@ -27,7 +27,7 @@ public class ThreeMatrixMultiplication {
             }
         else {
                 System.out.println( "Invalid input: " +A[1] + "!="+ B[0]);
-                System.out.println("Matrices are cannot be multiplied!" );
+                System.out.println("Matrices cannot be multiplied!" );
             return -1;}
     }
 
