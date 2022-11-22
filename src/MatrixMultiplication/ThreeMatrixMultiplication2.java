@@ -35,9 +35,6 @@ public class ThreeMatrixMultiplication2 {
         // min=m1*m2*m4+m1*m4*m3, max=m2*m4*m3+m1*m2*m3: max>=min? depends on m1,m2,m3,m4;
 
       //=====================Ring sorted=====================
-        // {5,10,20,30} ///(UUU),{10,20,30,5},{20,30,5,10},{30,5,10,20} ring sorted increasing order; min =4000.
-        // {5,30,20,10}, {30,20,10,5}\\\(DDD) ,{20,10,5,30},{10,5,30,20} ring sorted decreasing order; min =4000.
-
         // (m1,m2,m3,m4), (m2,m3,m4,m1), (m3,m4,m1,m2), (m4,m1,m2,m3) ring sorted increasing order;
         // min =m1*m2*m3+m1*m3*m4, max=m4*m1*m2+m4*m2*m3; max-min=m1*m2(m4-m3)+m4*m3(m2-m1)>=0;
         // (m4,m3m,m2,m1), (m3,m2,m1,m4), (m2,m1,m4,m3), (m1,m4,m3,m2) ring sorted decreasing order;
