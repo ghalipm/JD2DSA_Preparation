@@ -1,11 +1,9 @@
 package MatrixMultiplication;
 
 /**
- *         // (ABC)==> (A[0], B[0], C[0], C[1])=(10, 30, 5, 60)==>
- *         (AB)C=(10, 30, 5)+(10, 5, 60): min num=5 (also second min=10) showed up twice
- *         // (ABC)==> (A[0], B[0], C[0], C[1])=(10, 30, 5, 60)==>
- *         A(BC)=(30, 5, 60)+(10, 30, 60): max num=60 (also second max) showed up twice
- *         // check (10, 5, 30, 60); (10, 30, 5, 60); (30, 5, 10, 60); (30, 10, 5, 60); (5, 10, 30, 60); (5, 30, 10, 60)
+ *         // (ABC): DO NOT CHANGE ANYTHING IN THIS CLASS:
+ *         NOT EVEN THE INPUT OR THE ORDER OF THE INPUT !!!
+ *         THEY ARE NOT RANDOMLY GENERATED !!!
  */
 
 /**
@@ -14,30 +12,27 @@ package MatrixMultiplication;
 
 public class ThreeMatrixMultiplication2 {
     public static void main(String[] args) {
-        //int[] m = {7,3,5,4}; //matricesChain; matricesIndex
-        int[] m = {30,10,5,20}; //matricesChain; matricesIndex
 
-        //============================Ring Min case============================
-        //{5,30,10,20} /\/(UDU), {30,10,20,5}\/\(DUD), {10,20,5,30}/\/(UDU), {20,5,30,10}\/\(DUD), min=2500;
-        //{5,20,10,30} /\/ (UDU), {30,5,20,10} \/\(DUD),{10,30,5,20}/\/(UDU),{20,10,30,5} \/\(DUD) min =2500;
+         int max=15; int[] m = {5,10,max,6};//14, 15, 16; cause flip-flop  between min and max.
+        //int max=9; int[] m = {5,7,max,6}; //max=9,10; cause flip-flop between min and max.
 
-      //================================Ring Max Case================================
-        //{5,20,30,10}//\(UUD),{20,30,10,5} /\\(UDD),{30,10,5,20}\\/(DDU),{10,5,20,30}//\(DUU),
-        // min=5*20*30+5*30*10=3000+1500=4500, max=20*30*10+5*20*10=6000+1000=7000
-        //{5,10,30,20} //\ (UUD),{10,30,20,5}/\\(UDD), {30,20,5,10} \\/(DDU), {20,5,10,30}\//(DUU), min =4500;
+        //============================/\/: N (+-+/-+-) Case -- minVal==>minMult ============================
+        //{m1,m4,m2,m3}/\/(+-+),{m4,m2,m3,m1}\/\(-+-), {m2,m3,m1,m4}/\/, {m3,m1,m4,m2}\/\;
+        // min=(m1)*m4*m2+(m1)*m2*m3, max=m4*m2*m3+m1*m4*m3, max-min=m4*m2(m3-m1)+m1*m3(m4-m2)>=0;
+        //{m1,m3,m2,m4} /\/(+-+), {m3,m2,m4,m1} \/\, {m2,m4,m1,m3}/\/, {m4,m1,m3,m2}\/\;
+        // min=(m1)*m3*m2+(m1)*m2*m4, max=m3*m2*m4+m1*m3*m4, max-min=m3*m2(m4-m1)+m1*m4(m3-m2)>=0;
 
-        // (m1,m3,m4,m2) //\ (UUD),{m3,m4,m2,m1}/\\(UDD), {m4,m2,m1,m3} \\/(DDU), {m2,m1,m3,m4}\//(DUU);
-        // min=m1*m3*m4+m1*m4*m2, max=m3*m4*m2+m1*m3*m2: max>=min? depends on m1,m2,m3,m4;
-        //(10,20,30,15): min=(10)*20*30+(10)*30*15=6000+4500=10500, max=20*30*15+(10)*20*15=9000+3000=12000; m4=40, 50 still min<max;
-        //(10,20,60,15): min=10*20*60+10*60*15=12000+9000=21000, max=20*60*15+10*20*15=18000+3000=21000; min=max;
-        //(10,20,80,15): min=(10)*20*80+(10)*80*15=16000+12000=28000, max=20*80*15+10*20*15=24000+3000=27000; min>max;
-        // (m1,m2,m4,m3)//\(UUD ++-), (m2,m4,m3,m1)/\\(UDD +--), (m4,m3,m1,m2)\\/(DDU --+), (m3,m1,m2,m4)\//(DUU -++);
-        // min=m1*m2*m4+m1*m4*m3, max=m2*m4*m3+m1*m2*m3: max>=min? depends on m1,m2,m3,m4;
+      //================================\\/(//\): V Case -- Uncertain ================================
+        // (m1,m3,m4,m2) //\ (++-),{m3,m4,m2,m1}, {m4,m2,m1,m3}, {m2,m1,m3,m4}\//(-++);
+        // op1=m1*m3*m4+m1*m4*m2, op2=m3*m4*m2+m1*m3*m2: op2>=op1? depends on m1,m2,m3,m4;
+        // (m1,m2,m4,m3)//\, (m2,m4,m3,m1), (m4,m3,m1,m2), (m3,m1,m2,m4)\// (-++);
+        // op1=m1*m2*m4+m1*m4*m3, op2=m2*m4*m3+m1*m2*m3: op2>=op1? depends on m1,m2,m3,m4;
+        ////: Only in this case , need to calculate 4 multiplications to find the min and max.
 
-      //=====================Ring sorted=====================
-        // (m1,m2,m3,m4), (m2,m3,m4,m1), (m3,m4,m1,m2), (m4,m1,m2,m3) ring sorted increasing order;
+      //=====================///(\\\): Monotone case - Ring sorted -- minVal==>minMult =====================
+        // (m1,m2,m3,m4)///, (m2,m3,m4,m1), (m3,m4,m1,m2), (m4,m1,m2,m3) ring sorted increasing order;
         // min =m1*m2*m3+m1*m3*m4, max=m4*m1*m2+m4*m2*m3; max-min=m1*m2(m4-m3)+m4*m3(m2-m1)>=0;
-        // (m4,m3m,m2,m1), (m3,m2,m1,m4), (m2,m1,m4,m3), (m1,m4,m3,m2) ring sorted decreasing order;
+        // (m4,m3m,m2,m1)\\\, (m3,m2,m1,m4), (m2,m1,m4,m3), (m1,m4,m3,m2) ring sorted decreasing order;
         // min=m1*m2*m3+m1*m3*m4; max=m4*m1*m2+m4*m2*m3; max-min=m1*m2(m4-m3)+m4*m3(m2-m1)>=0;
 
         System.out.println("minNumsOfMultiplications(m) = " + minNumsOfMultiplications(m));
@@ -45,10 +40,14 @@ public class ThreeMatrixMultiplication2 {
         /**
          * 4 element permutation: 4!=24; ring sorted starting the min element at the first position of the ring
          * : 3*2*1=6 different cases;
-         * essentially only ///(\\\), //\(/\\), /\/(\/\) : 3 different cases.
-         * what if 2 or 2 nums equal? {5,20,20,10} //\ (UUD),{20,20,10,5}/\\(UDD), {20,10,5,20} \\/(DDU), {10,5,20,20}\//(DUU), min =3000;
-         * {5,20,20,20} /// (UUU)(not D is U), min =4000;
+         * essentially only ///(\\\), //\(/\\), /\/(\/\) : 3 types of gradients.
+         * "2 out 3 cases, min value provides the min number of multiplications." : 2/3=0.6666666666666666;
+         * So 2 out of 3 cases, need to calculate only 2 multiplications out
+         * of 4 multiplications associated with 3 matrices.
+         * Thus at least (2/3)*(2/4)=1/3 improvement in the number of multiplications for 3 matrices.
+         * what if 2 or 3 nums equal? NP. If all equal, then 1 case, nothing to optimize
          */
+
     }
 
     public static int minNumsOfMultiplications(int[] m){
