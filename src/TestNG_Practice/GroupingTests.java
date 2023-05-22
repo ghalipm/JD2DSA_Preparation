@@ -2,7 +2,7 @@ package TestNG_Practice;
 
 import org.testng.annotations.Test;
 
-public class DummyTests {
+public class GroupingTests {
 
     @Test(groups = {"smoke", "regression"})
     public void test1(){
@@ -29,8 +29,28 @@ public class DummyTests {
         System.out.println("This is test 5");
     }
 
-    @Test(groups = {"smoke"})
+    @Test(groups = {"regression"})
     public void test6(){
         System.out.println("This is test 6");
+    }
+
+    @Test(groups = {"regression"})
+    public void test7(){
+        System.out.println("This is test 7");
+    }
+
+    @Test(groups = {"regression"})
+    public void test8(){
+        System.out.println("This is test 8");
+    }
+
+    @Test(priority = 2,groups = {"smoke"})
+    public void test9(){
+        System.out.println("This is test 9");
+    }
+
+    @Test(priority = 1, groups = {"regression"} )
+    public void test10(){
+        System.out.println("This is test 10");
     }
 }
