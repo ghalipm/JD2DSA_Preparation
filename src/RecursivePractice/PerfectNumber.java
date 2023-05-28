@@ -3,7 +3,10 @@ package RecursivePractice;
 public class PerfectNumber {
     public static int squareOfDigits(int number) {
         int digitSum = 0;
-        while (number > 0) {
+        if (number == 0) {
+            return 0;
+        }
+        while (number != 0) {
             int digit = number % 10;
             digitSum += digit * digit;
             number /= 10;
@@ -13,7 +16,8 @@ public class PerfectNumber {
 
     public static boolean isPerfect(int number) {
         System.out.println("number before loop = " + number);
-        while (true) {
+
+        while (number != 0) {
             number = squareOfDigits(number);
             if (number == 1) {
                 return true;
@@ -21,9 +25,10 @@ public class PerfectNumber {
                 return false;
             }
         }
+        return false;
     }
 
     public static void main(String[] args) {
-        System.out.println("Is perfect = " + isPerfect(86));
+        System.out.println("Is perfect = " + isPerfect(-86));
     }
 }
