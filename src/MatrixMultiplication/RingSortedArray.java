@@ -25,7 +25,7 @@ public class RingSortedArray {
      *         m0
      */
 
-    int[] matrixDimensionArray=new int[4];
+    int[] primarySortedArray=new int[4];
     public static boolean isRingSorted(int[] array){
         boolean isRingSorted=false;
         int min=min(array);
