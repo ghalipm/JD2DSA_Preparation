@@ -26,16 +26,26 @@ public class RingSortedArray {
      */
 
     int[] primarySortedArray=new int[4];
-    public static boolean isRingSorted(int[] array){
-        boolean isRingSorted=false;
-        int min=min(array);
-        int max=max(array);
-        int[] newArray=new int[array.length];
+    public static boolean isRingSorted(int[] array) {
+        boolean isRingSorted = false;
+        int min = min(array);
+        int max = max(array);
+        int[] newArray = new int[array.length];
         // check if array is increasing ring sorted:
         /**
          * starting from the min element, check if the next element
          *  is larger than the previous one until we reach the max element
          */
+        return isRingSorted;
+    }
+        public static boolean isSorted(int[] arr) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
 
         // check if array is decreasing ring sorted:
@@ -44,7 +54,5 @@ public class RingSortedArray {
          *  is smaller than the previous one until we reach the min element
          */
 
-        return isRingSorted;
-    }
 
 }
